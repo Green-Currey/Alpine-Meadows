@@ -1,0 +1,51 @@
+# Land cover analysis
+# Metadata for the NALCMS Landcover data
+# The following list describes the display of land cover classification in the .tif file:
+# Value 1, Temperate or sub-polar needleleaf forest, RGB 0 61 0;
+# Value 2, Sub-polar taiga needleleaf forest, RGB 148 156 112;
+# Value 3, Tropical or sub-tropical broadleaf evergreen forest, RGB 0 99 0;
+# Value 4, Tropical or sub-tropical broadleaf deciduous forest, RGB 30 171 5;
+# Value 5, Temperate or sub-polar broadleaf deciduous forest, RGB 20 140 61;
+# Value 6, Mixed forest, RGB 92 117 43;
+# Value 7, Tropical or sub-tropical shrubland, RGB 179 158 43;
+# Value 8, Temperate or sub-polar shrubland, RGB 179 138 51;
+# Value 9, Tropical or sub-tropical grassland, RGB 232 220 94;
+# Value 10, Temperate or sub-polar grassland, RGB 225 207 138;
+# Value 11, Sub-polar or polar shrubland-lichen-moss, RGB 156 117 84;
+# Value 12, Sub-polar or polar grassland-lichen-moss, RGB 186 212 143;
+# Value 13, Sub-polar or polar barren-lichen-moss, RGB 64 138 112;
+# Value 14, Wetland, RGB 107 163 138;
+# Value 15, Cropland, RGB 230 174 102;
+# Value 16, Barren lands, RGB 168 171 174;
+# Value 17, Urban, RGB 220 33 38;
+# Value 18, Water, RGB 76 112 163;
+# Value 19, Snow and Ice, RGB 255 250 255.
+
+
+rm(list = ls())
+cat('\014')
+
+library(raster)
+
+
+GYE.grass.forest <- raster('f:/GIS_data/GYE/Raster/GYE_NALCMS_LC.tif')
+# Grassland = 1
+# Forest = 2
+# Other = 3
+
+
+GYE.grass.forest[GYE.grass.forest>10] <- 3
+
+GYE.grass.forest[GYE.grass.forest==1] <- 2
+GYE.grass.forest[GYE.grass.forest==5] <- 2
+GYE.grass.forest[GYE.grass.forest==6] <- 2
+
+GYE.grass.forest[GYE.grass.forest==8] <- 1
+GYE.grass.forest[GYE.grass.forest==10] <- 1
+
+plot(GYE.grass.forest)
+
+
+
+writeRaster(GYE.grass.forest, 'f:/GIS_data/GYE/Raster/GYE_grass_forest_LC.tif')
+
