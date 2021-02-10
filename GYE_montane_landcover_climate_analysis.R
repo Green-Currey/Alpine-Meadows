@@ -26,7 +26,7 @@ plot(lc)
 montane.lc <- montane*lc
 montane.lc
 plot(montane.lc)
-writeRaster(montane.lc, 'z:/gis_data/gye/Raster/GYE_grass_forest_LC_wgs.tif', overwrite = T)
+writeRaster(montane.lc, 'z:/gis_data/gye/Raster/GYE_grass_forest_montane.tif', overwrite = T)
 
 
 # Precipitation -----------------------------------------------------------
