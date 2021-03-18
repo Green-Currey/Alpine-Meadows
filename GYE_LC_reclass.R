@@ -28,24 +28,33 @@ cat('\014')
 library(raster)
 
 
-GYE.grass.forest <- raster('f:/GIS_data/GYE/Raster/GYE_NALCMS_LC.tif')
-# Grassland = 1
-# Forest = 2
-# Other = 3
+GYE.grass.forest <- raster('z:/GIS_data/GYE/Raster/GYE_NALCMS_LC.tif')
 
 
-GYE.grass.forest[GYE.grass.forest>10] <- 3
 
-GYE.grass.forest[GYE.grass.forest==1] <- 2
-GYE.grass.forest[GYE.grass.forest==5] <- 2
-GYE.grass.forest[GYE.grass.forest==6] <- 2
+GYE.grass.forest[GYE.grass.forest>10] <- 4
 
-GYE.grass.forest[GYE.grass.forest==8] <- 1
+GYE.grass.forest[GYE.grass.forest==1] <- 3
+GYE.grass.forest[GYE.grass.forest==5] <- 3
+GYE.grass.forest[GYE.grass.forest==6] <- 3
+
+GYE.grass.forest[GYE.grass.forest==8] <- 2
 GYE.grass.forest[GYE.grass.forest==10] <- 1
 
 plot(GYE.grass.forest)
 
 
 
-writeRaster(GYE.grass.forest, 'f:/GIS_data/GYE/Raster/GYE_grass_forest_LC.tif')
+writeRaster(GYE.grass.forest, 'z:/GIS_data/GYE/Raster/GYE_grass_shrub_forest_LC.tif')
+
+# For GYE_grass_forest_lc.tif
+# Grassland = 1
+# Forest = 2
+# Other = 3
+
+# For GYE_grass_shrub_forest_lc.tif
+# Grassland = 1
+# Shrubland = 2
+# Forest = 3
+# Other = 4
 
