@@ -95,3 +95,5 @@ gye.montane <- L2 + L3 + L4 + L5
 writeRaster(gye.montane, 'z:/gis_data/gye/Raster/30m_montane_GYE_cropped.tif', overwrite = T)
 gye.montane.m <- mask(gye.montane, gye)
 writeRaster(gye.montane.m, 'z:/gis_data/gye/Raster/30m_montane_GYE_masked.tif', overwrite = T)
+
+
