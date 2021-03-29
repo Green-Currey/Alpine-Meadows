@@ -1,3 +1,8 @@
+
+# Original reclass --------------------------------------------------------
+
+
+
 # Land cover analysis
 # Metadata for the NALCMS Landcover data
 # The following list describes the display of land cover classification in the .tif file:
@@ -58,3 +63,40 @@ writeRaster(GYE.grass.forest, 'z:/GIS_data/GYE/Raster/GYE_grass_shrub_forest_LC.
 # Forest = 3
 # Other = 4
 
+
+
+
+# Masking reclass ---------------------------------------------------------
+
+# grass 
+veg <- raster('z:/GIS_data/GYE/Raster/GYE_grass_shrub_forest_LC2.tif')
+veg
+
+# 1 = grass
+# 2 = shrub
+# 3 = forest
+# 4 = other
+rcl <- matrix(c(0,1,1,
+                1,4,0), ncol = 3, byrow = T)
+rcl
+veg.rcl <- reclassify(veg, rcl)
+plot(veg.rcl)
+writeRaster(veg.rcl, 'z:/gis_data/gye/raster/gye_grass_mask.tif')
+
+
+# grass shrub
+rcl <- matrix(c(0,2,1,
+                2,4,0), ncol = 3, byrow = T)
+rcl
+veg.rcl <- reclassify(veg, rcl)
+plot(veg.rcl)
+writeRaster(veg.rcl, 'z:/gis_data/gye/raster/gye_grass_shrub_mask.tif')
+
+
+# grass shrub forest
+rcl <- matrix(c(0,3,1,
+                3,4,0), ncol = 3, byrow = T)
+rcl
+veg.rcl <- reclassify(veg, rcl)
+plot(veg.rcl)
+writeRaster(veg.rcl, 'z:/gis_data/gye/raster/gye_allveg_mask.tif')
