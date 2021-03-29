@@ -2,7 +2,7 @@
 
 library(raster)
 library(dplyr)
-dem <- raster('d:/gis_data/GYE/Raster/30m_dem_GYE.tif')
+dem <- raster('z:/gis_data/GYE/Raster/30m_dem_GYE.tif')
 dem <- aggregate(dem, fact = 33.333, fun = mean)
 dem
 # plot(dem)
@@ -13,6 +13,10 @@ dem.mat <- dem %>% as.matrix()
 # around each cell. If 300m of relief is found within the LER window, the cell
 # is deemed a mountain.
 
+# number of cells to check distance from edge
+cells <- 5
+
+
 for (i in seq(nrow(dem.mat))) {
      for (j in seq(ncol(dem.mat))) {
           
@@ -22,15 +26,15 @@ for (i in seq(nrow(dem.mat))) {
                
                # this section of logical statements checks for the edges
                # of the map and adjusts the LER window
-               if (i < 5) {i.seq <- i:(i+5)
-               } else if (i > nrow(dem.mat)-5) {i.seq <- (i-5):nrow(dem.mat)
-               } else {i.seq <- (i-5):(i+5)
+               if (i < cells) {i.seq <- i:(i+cells)
+               } else if (i > nrow(dem.mat)-cells) {i.seq <- (i-cells):nrow(dem.mat)
+               } else {i.seq <- (i-cells):(i+cells)
                }
                
                
-               if (j < 5) {j.seq <- j:(j+5)
-               } else if (j > ncol(dem.mat)-5) {(j-5):ncol(dem.mat)
-               } else {j.seq <- (j-5):(j+5)
+               if (j < cells) {j.seq <- j:(j+cells)
+               } else if (j > ncol(dem.mat)-cells) {(j-cells):ncol(dem.mat)
+               } else {j.seq <- (j-cells):(j+cells)
                }
                
                LER <- dem.mat[i.seq, j.seq]
@@ -43,4 +47,4 @@ for (i in seq(nrow(dem.mat))) {
      }
 }
 
-write.csv(LER.gye, 'd:/gis_data/GYE/LER_GYE.csv')
+write.csv(LER.gye, 'z:/gis_data/GYE/LER_GYE.csv')
